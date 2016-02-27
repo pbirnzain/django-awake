@@ -1,0 +1,13 @@
+django-awake is a small django-based webservice that I hacked together in (literally, excluding this file and uploading) 5 minutes to allow me to boot a server from machines that I don't want to install my ssh key on.
+My setup is a standard desktop PC that I want to awake, and a raspberry pi that is connected to the same switch as the PC and runs this service. By visiting a special URL e.g. on my smartphone, I can trigger a WOL packed from the raspi that wakes the desktop PC without needing ssh access or static ARP entries.
+
+How to use:
+
+1) run $ sudo pip3 install gunicorn django awake
+2) adjust the MAC address in wakeui/views.py
+2a) optionally adjust the trigger URL in djangowake/urls.py
+3) run it: $ gunicorn djangowake.wsgi
+
+4) direct your browser to http://localhost:8000/wake to test
+
+Note that gunicorn is designed to be run behind a proxy such as nginx, see the gunicorn documentation for more information.
